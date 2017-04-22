@@ -14,12 +14,16 @@ def sampling(input):
 
             count = 0;
             for row in spamreader:
-                count += 1;
-                if count%100000 == 0:
-                    print(count/100000)
-                num = random.randint(1, 37);
-                if num == 1:
+                if count == 0:
                     spamwriter.writerow(row)
+                    count += 1;
+                else:
+                    count += 1;
+                    if count%100000 == 0:
+                        print(count/100000)
+                    num = random.randint(1, 40);
+                    if num == 1:
+                        spamwriter.writerow(row)
         fin.close()
     fou.close()
 
