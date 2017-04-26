@@ -1,8 +1,6 @@
 import random
 import csv
 
-
-
 def sampling(input):
     random.seed(11)
     output = "S" + input
