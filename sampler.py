@@ -19,9 +19,9 @@ def sampling(input):
                     count += 1;
                     if count%100000 == 0:
                         print(count/100000)
-                    num = random.randint(1, 40);
+                    num = random.randint(1, 80);
                     if num == 1:
-                        spamwriter.writerow(row)
+                        if row[1].split(",")[6] != "": spamwriter.writerow(row)
         fin.close()
     fou.close()
 
