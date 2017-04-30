@@ -1,4 +1,4 @@
-function [lda_model, accuracy] = lda(T_train, T_test)
+function [lda_model, accuracy, y_hat] = lda(T_train, T_test)
 
 [n, ~] = size(T_train);
 
@@ -13,5 +13,6 @@ lda_model = fitcdiscr(X_train,y_train);
 
 y_hat = predict(lda_model, X_test);
 accuracy = sum(y_hat == y_test)/n;
+fprintf('Accuracy: %d', accuracy);
 
 end
