@@ -9,10 +9,9 @@ y_train = T_train(:, end);
 X_test = T_test(:, 1:end-1);
 y_test = T_test(:, end);
 
-lda_model = fitcdiscr(X_train,y_train);
+lda_model = fitcdiscr(X_train,y_train, 'DiscrimType', 'diaglinear');
 
 y_hat = predict(lda_model, X_test);
-accuracy = sum(y_hat == y_test)/n;
-fprintf('Accuracy: %d', accuracy);
+
 
 end
