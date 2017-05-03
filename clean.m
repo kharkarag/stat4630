@@ -1,9 +1,13 @@
 % Selecting vars of certain type
 
-categVars = varfun(@iscategorical,s,'output','uniform');
-numVars = varfun(@isnumeric,s,'output','uniform');
-s_num = s(:, numVars);
-s_categ = s(:, categVars);
+cluster_counts = (sortrows([[1:100].' countcats(s.hotel_cluster)], -2));
+s_cluster = s(ismember(s.hotel_cluster, categorical(cluster_counts(1:5, 1))), :);
+
+
+categVars = varfun(@iscategorical,s_cluster,'output','uniform');
+numVars = varfun(@isnumeric,s_cluster,'output','uniform');
+s_num = s_cluster(:, numVars);
+s_categ = s_cluster(:, categVars);
 
 s_num.orig_destination_distance = [];
 
@@ -34,6 +38,10 @@ for i = 1:c
        removal = [removal i];
     end
 end
+clear numvals
+
 
 categ_dummy_clean = categ_dummy;
 categ_dummy_clean(:, removal) = [];
+
+clear removal

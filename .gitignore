@@ -1,2 +1,6 @@
 *.csv
+<<<<<<< HEAD
 neuralnet/
+=======
+cross.m
+>>>>>>> origin/master

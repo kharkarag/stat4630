@@ -1,0 +1,21 @@
+>> neural_val
+   100
+
+Performance: 35.66%
+Accuracy: 1.36%
+   200
+
+Performance: 35.66%
+Accuracy: 1.77%
+   300
+
+Performance: 35.66%
+Accuracy: 1.77%
+   400
+
+Performance: 35.66%
+Accuracy: 2.30%
+   500
+
+Performance: 35.66%
+Accuracy: 2.01%
