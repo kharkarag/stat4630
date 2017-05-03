@@ -6,7 +6,7 @@ s = categorical_conversion(s_original);
 
 [nrow, ncol] = size(s);
 
-sample = randperm(nrow,50000)';
+sample = randsample(nrow, 20000);
 nrow = size(sample, 1);
 % sample = sample(1:15000,:);
 
@@ -20,7 +20,7 @@ test_y =  s(sample(fix(nrow*3/4)+1:end), end);
 % test_x = s(sample(7501:end), 1:end-1);
 % test_y =  s(sample(7501:end), end);
 
-mdl_tree = dec_tree(train_x, train_y, 1, 1);
+mdl_tree = dec_tree(train_x, train_y, 2);
+
 result = predict(mdl_tree, test_x);
-
-
+count(result==test_y)/2500
