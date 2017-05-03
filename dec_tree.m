@@ -8,7 +8,7 @@ selected_rule = rules{rule_n};
 tree = fitctree(X,Y, 'SplitCriterion', selected_rule);
 
 % Optimize Pruning Level
-[~,~,~,bestlevel] = cvLoss(Mdl,...
+[~,~,~,bestlevel] = cvLoss(tree,...
     'SubTrees','All','TreeSize','min');
     
 % Pruning
