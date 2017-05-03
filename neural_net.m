@@ -11,12 +11,12 @@ disp(layers);
 net.trainFcn = 'traingdm'; % Momentum
 net.trainParam.max_fail = 10;
 net.performFCN = 'crossentropy';
-[net, tr] = train(net, X_tr, y_tr);
+[net, tr] = train(net, X_tr, y_tr, 'useGPU', 'yes');
 
 y_hat = net(X_te);
 
 performance = perform(net, y_tr, y_te);
-fprintf('Performance: %2.2f%%\n', performance*100);
+fprintf('Performance: %f\n', performance);
 
 [~, ind] = max(y_hat);
 evaluate(ind.',  y_eval);
