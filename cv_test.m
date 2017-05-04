@@ -57,9 +57,9 @@ for i = 1:n_fold
     cat_cluster_pair = zeros(size(destination_cat,1),1); %save the most popular cluster for each destination
     % get the most popular destination for each destination
     for j = 1:size(destination_cat,1)
-        count = countcats(y_tree.hotel_cluster(x_tree.srch_destination_id == cat{j}));
+        count = countcats(y_tree.hotel_cluster(x_tree.srch_destination_id == destination_cat{j}));
         maximum_index = find(count==max(count));
-        if maximum_index > 1
+        if size(maximum_index,1) > 1
             maximum_index = maximum_index(randperm(size(maximum_index,1),1));
         end 
         cat_cluster_pair(j) = maximum_index;
