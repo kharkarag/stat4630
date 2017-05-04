@@ -1,0 +1,14 @@
+s_original - 1M
+d
+s - 1M
+
+s_num - 1M
+s_categ - 1M
+categ_dummy - 1M
+
+---What we should have ---
+
+master - 1M (s_num + s_categ + s_y)
+s_train - 300K
+	s_train_tree - 100K
+		s_train_neural - 50K

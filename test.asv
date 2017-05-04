@@ -31,7 +31,7 @@ s.date_time = [];
 hc = categorical(s.hotel_cluster);
 s.hotel_cluster = [];
 s.hotel_cluster = hc;
-clear hc;
+cea
 
 
 for i = 1:size(s,2)

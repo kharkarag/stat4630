@@ -1,27 +1,26 @@
-function [net, y_hat, tr, performance] = neural_net(X_tr, y_tr, X_te, y_te, y_eval, layers)
+function [net, tr] = neural_net(X_tr, y_tr, eval, layers, X_te, y_te)
 
-%net = patternnet([500, 500, 400, 400, 400, 300, 300, 300, 200, 200]);
-%net = patternnet([500, 400, 300, 200]);
-net = patternnet([500, 400, 300, 200, 100, 50, 10]);
-%net = patternnet(layers);
+%net = patternnet([125 125 100 100 75 50 10]);
+%net = patternnet([125 100 75 50 10]);
+net = patternnet(layers);
 disp(layers);
 
 %net = patternnet([500]);
 
 net.trainFcn = 'traingdm'; % Momentum
-net.trainParam.max_fail = 10;
+net.trainParam.max_fail = 15;
 net.performFCN = 'crossentropy';
-[net, tr] = train(net, X_tr, y_tr, 'useGPU', 'yes');
+[net, tr] = train(net, X_tr.', y_tr.', 'useGPU', 'yes');
+%[net, tr] = train(net, X_tr, y_tr);
 
-y_hat = net(X_te);
+if eval == 1
 
-performance = perform(net, y_tr, y_te);
-fprintf('Performance: %f\n', performance);
+    y_hat = net(X_te.');
+    [~, ind] = max(y_hat);
+    evaluate(ind.',  y_te);
+end
 
-[~, ind] = max(y_hat);
-evaluate(ind.',  y_eval);
-
-
-%[net, nn_pred, nn_perf] = neural_net([s_num_train s_categ_train].', y_train.', [s_num_test s_categ_test].', y_test.');
+% How to run:
+% [net, tr, nn_pred] = neural_net(<x_train>, <y_train>, 1, ideal_layers, <x_test>, <y_test>);
 
 end

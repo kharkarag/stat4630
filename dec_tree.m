@@ -10,8 +10,7 @@ tree = fitctree(X,Y, 'SplitCriterion', selected_rule,  'CategoricalPredictors', 
 
 if pruning == 1
     % Optimize Pruning Level
-    [~,~,~,bestlevel] = cvLoss(tree,...
-    'SubTrees','All','TreeSize','min');
+    [~,~,~,bestlevel] = cvLoss(tree,'SubTrees','All','TreeSize','min');
     
     % Pruning
     tree = prune(tree,'Level',bestlevel);

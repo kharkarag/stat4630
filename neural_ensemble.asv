@@ -18,13 +18,12 @@ accuracies = zeros(1, 8);
 for i = 1:8
    x_holdout = s_neural_cv(indices_boost == i, 1:(end-1));
    y_holdout = s_neural_cv(indices_boost == i, end);
-   aggregate = zeros(5, 5000);
+   aggregate = zeros(7, 5000);
    fprintf('Holdout #%d\n', i);
    for j = indices_boost(indices_boost ~= i)
        net = committee{j, 1};
        yhat = net(x_holdout.');
-       [m, class] = max(yhat);
-       aggregate = aggregate + dummyvar(class).';
+       aggregate(j, :) = max(yhat);
    end
    [~, ind] = max(aggregate);
    accuracies(i) = evaluate(ind.', y_holdout); 
@@ -32,7 +31,7 @@ for i = 1:8
 end
 clear x_holdout y_holdout aggregate net yhat;
 
-fprintf('Average accuracy of committee: %2.2f%%\n', mean(accuracies)*100);
+fprintf('Average accuracy of committee: %f%%\n', mean(accuracies)*100);
 
 % ------------
 
