@@ -26,10 +26,10 @@ clear working_set
 % Subset of the main (LDA) set
 
 sample_50 = randsample(100000, 50000);
-
+sample_10 = randsample(100000, 10000);
 master_tree = s(sample, :);
 working_tree = master_tree(indices > 1, :);
-s_tree = working_tree(sample_50, :);
+s_tree = working_tree(sample_10, :);
 x_tree = s_tree(:, 1:(end-1));
 y_tree = s_tree(:, end);
 
