@@ -1,6 +1,5 @@
-function [mdl] = rand_forest(X, Y, n_tree)
-categVars = varfun(@iscategorical, X,'output','uniform');
+function [mdl] = rand_forest(X, Y, categorical_index, n_tree)
 mdl = TreeBagger(n_tree, X, Y, 'Method', 'Classification', ...
-    'CategoricalPredictors', categVars);
+    'CategoricalPredictors', categorical_index);
 
 end 

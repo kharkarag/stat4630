@@ -5,7 +5,7 @@ d = readtable('destinations.csv');
 %s_original = join(s_original, d, 'keys', 'srch_destination_id');
 
 nrow = size(s_original,1);
-sample_size = 50000;
+sample_size = 30000;
 sample = randperm(nrow, sample_size)';
 s_sample = s_original(sample,:);
 
@@ -14,6 +14,7 @@ catogory_var_index = varfun(@iscategorical,s_cat,'output','uniform');
 catogory_var_index = catogory_var_index(1:end-1);
 s_sample = s_cat;
 
+%get categories
 cat = categories(s_cat.srch_destination_id);
 clusters = categories(s_cat.hotel_cluster);
 
