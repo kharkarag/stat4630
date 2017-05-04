@@ -1,4 +1,4 @@
-samples = 15000;
+samples = 5000;
 X_tr = x_neural_struct_train(:, 1:samples);
 y_tr = y_neural_struct_train(:, 1:samples);
 

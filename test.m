@@ -18,7 +18,6 @@ s.hotel_country = categorical(s.hotel_country);
 s.srch_ci = datetime(s.srch_ci,'InputFormat','yyyy-MM-dd');
 s.srch_co = datetime(s.srch_co,'InputFormat','yyyy-MM-dd');
 s.length_of_stay = datenum(s.srch_co) - datenum(s.srch_ci);
-s.check_in_month = str2num(datestr(s.srch_ci, 'MM'));
 
 s.user_id = [];
 s.srch_ci = [];
