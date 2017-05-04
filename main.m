@@ -21,9 +21,12 @@ cross;
 cv_test;
 
 % Random Tree
+tree_model = dec_tree(x_tree, y_tree, category_var_index, 1, 0);
+tree_pred = double(predict(tree_model, x_tree_test));
+tree_evaluate(tree_pred, double(table2array(y_tree_test)));
 
 % Performs pruning
-tree_model = dec_tree(x_tree, y_tree, category_var_index, 1, 0);
+tree_model = dec_tree(x_tree, y_tree, category_var_index, 1, 1);
 tree_pred = double(predict(tree_model, x_tree_test));
 tree_evaluate(tree_pred, double(table2array(y_tree_test)));
 
