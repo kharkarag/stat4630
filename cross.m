@@ -24,18 +24,23 @@ clear working_set
 
 % Decision tree training set - 100K
 % Subset of the main (LDA) set
-sample_small = randsample(300000, 100000);
-working_tree = s(sample, :);
-tree_subset = working_tree(indices > 1, :);
-s_tree = tree_subset(sample_small, :);
+
+sample_50 = randsample(100000, 50000);
+
+master_tree = s(sample, :);
+working_tree = master_tree(indices > 1, :);
+s_tree = working_tree(sample_50, :);
 x_tree = s_tree(:, 1:(end-1));
 y_tree = s_tree(:, end);
-clear master_tree working_tree tree_subset;
+
+s_tree_test = master_tree(indices == 1, :);
+x_tree_test = s_tree_test(:, 1:(end-1));
+y_tree_test = s_tree_test(:, end);
+clear working_tree master_tree;
 
 % Neural network subset - 50K
 % Not all used at once
-neural_subset = s_lda(sample_small, :);
-s_neural = neural_subset(randsample(100000, 50000), :);
+s_neural = s_lda(sample_50, :);
 
 indices_neural = crossvalind('Kfold', 50000, 10);
 s_neural_struct_train = s_neural(indices_neural == 1, :);

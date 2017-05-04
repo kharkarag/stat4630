@@ -5,13 +5,11 @@ function [net, tr] = neural_net(X_tr, y_tr, eval, layers, X_te, y_te)
 net = patternnet(layers);
 disp(layers);
 
-%net = patternnet([500]);
-
 net.trainFcn = 'traingdm'; % Momentum
 net.trainParam.max_fail = 15;
 net.performFCN = 'crossentropy';
-[net, tr] = train(net, X_tr.', y_tr.', 'useGPU', 'yes');
-%[net, tr] = train(net, X_tr, y_tr);
+%[net, tr] = train(net, X_tr.', y_tr.', 'useGPU', 'yes');
+[net, tr] = train(net, X_tr.', y_tr.');
 
 if eval == 1
 
