@@ -9,9 +9,6 @@ s_num = table2array(s_num);
 
 % Dummy variable generation
 s_categ.srch_destination_id = [];
-s_categ.user_location_region = [];
-s_categ.user_location_city = [];
-s_categ.hotel_market = [];
 s_categ.hotel_cluster = [];
     
 [n, c] = size(s_categ);

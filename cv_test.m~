@@ -1,44 +1,32 @@
-s_original = readtable('Strain.csv');
+category_var_index = categVars;
+category_var_index = category_var_index(1:end-1);
 
-% d = readtable('destinations.csv');
-
-[s,s_cat] = categorical_conversion(s_original);
-catogory_var_index = varfun(@iscategorical,s_cat,'output','uniform');
-catogory_var_index = catogory_var_index(1:end-1);
-
-
-[nrow, ncol] = size(s);
-sample_size = 50000;
-sample = randperm(nrow, sample_size)';
-s_sample = s(sample,:);
-
-n_fold = 10;
+n_fold = 5;
 
 rng(11)
-cv_group = crossvalind('Kfold', sample_size, n_fold);
-result = zeros(sample_size, 1);
+cv_group = crossvalind('Kfold', size(x_tree,1), n_fold);
 
+result_tree_not_pruned = zeros(size(x_tree,1), 3);
+result_tree_pruned
 for i = 1:n_fold
-    train_x = s_sample(cv_group==i,1:end-1);
-    train_y = s_sample(cv_group==i,end);
-    test_x = s_sample(cv_group==i,1:end-1);
-    test_y = 
+    disp(i);
+    train_x = x_tree(cv_group~=i,1:end);
+    train_y = y_tree(cv_group~=i,end);
+    test_x = x_tree(cv_group==i,1:end);
+   
+    mdl_tree
+    mdl_tree = dec_tree(train_x, train_y, category_var_index, 1, 1);
+    result(cv_group==i,1) = predict(mdl_tree, test_x);   
 end 
-nrow = size(sample, 1);
+
+sum(result == s_sample(:,end)) / size(result,1)
+
+full_x = s_sample(:,1:end-1);
+full_y = s_sample(:,end);
+mdl_tree = dec_tree(full_x, full_y, catogory_var_index, 1, 1);
+% model_forest = rand_forest(train_x, train_y, 100);
+% result_forest = predict(model_forest, test_x)
+% sum(test_y.hotel_cluster == result_forest)/size(test_y,1)
 
 
-cvfold = 10;
-
-
-train_x = s(sample(1:fix(nrow*3/4)), 1:end-1);
-train_y = s(sample(1:fix(nrow*3/4)), end);
-test_x = s(sample(fix(nrow*3/4)+1:end), 1:end-1);
-test_y =  s(sample(fix(nrow*3/4)+1:end), end);
-
-mdl_tree = dec_tree(train_x, train_y, 1, 1);
-result_tree = predict(mdl_tree, test_x);
-sum(test_y.hotel_cluster == result_tree)/size(test_y,1)
-
-model_forest = rand_forest(train_x, train_y, 100);
-result_forest = predict(model_forest, test_x)
-sum(test_y.hotel_cluster == result_forest)/size(test_y,1)
+s_sample(:,11)

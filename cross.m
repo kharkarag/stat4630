@@ -17,8 +17,8 @@ y_test = s_test(:, end);
 % Main training subset of 300K
 % Used directly by main(LDA) set
 s_lda = working_set(indices > 1, :);
-x_lda = s_train(:, 1:(end-1));
-y_lda = s_train(:, end);
+x_lda = s_lda(:, 1:(end-1));
+y_lda = s_lda(:, end);
 
 clear working_set
 
@@ -51,20 +51,20 @@ s_neural_cv = s_neural(indices_neural > 2, :);
 
 % -------------------------------------------------
 
-indices = crossvalind('Kfold', n, 3);
-
-s_categ_train = categ_dummy(indices == 1, :);
-s_categ_val = categ_dummy(indices == 2, :);
-s_categ_test = categ_dummyn(indices == 3, :);
-
-s_num_train = s_num(indices == 1, :);
-s_num_val = s_num(indices == 2, :);
-s_num_test = s_num(indices == 3, :);
-
-y_train = double(s.hotel_cluster(indices == 1, :));
-y_val = double(s.hotel_cluster(indices == 2, :));
-y_test = double(s.hotel_cluster(indices == 3, :));
-
-s_train = [s_categ_train s_num_train y_train];
-s_val = [s_categ_val s_num_val y_val];
-s_test = [s_categ_test s_num_test y_test];
+% indices = crossvalind('Kfold', n, 3);
+% 
+% s_categ_train = categ_dummy(indices == 1, :);
+% s_categ_val = categ_dummy(indices == 2, :);
+% s_categ_test = categ_dummyn(indices == 3, :);
+% 
+% s_num_train = s_num(indices == 1, :);
+% s_num_val = s_num(indices == 2, :);
+% s_num_test = s_num(indices == 3, :);
+% 
+% y_train = double(s.hotel_cluster(indices == 1, :));
+% y_val = double(s.hotel_cluster(indices == 2, :));
+% y_test = double(s.hotel_cluster(indices == 3, :));
+% 
+% s_train = [s_categ_train s_num_train y_train];
+% s_val = [s_categ_val s_num_val y_val];
+% s_test = [s_categ_test s_num_test y_test];
