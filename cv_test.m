@@ -76,3 +76,7 @@ for i = 1:n_fold
     end  
 end 
 sum(result4 == y_tree.hotel_cluster)/size(y_tree,1)
+
+full_tree = dec_tree(x_tree, y_tree, category_var_index, 1, 0);
+full_tree_pruned = dec_tree(x_tree, y_tree, category_var_index, 1, 1);
+full_rf = rand_forest(x_tree, y_tree, category_var_index, 100);
