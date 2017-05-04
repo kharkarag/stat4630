@@ -6,7 +6,7 @@ n_fold = 5;
 rng(11)
 cv_group = crossvalind('Kfold', size(x_tree,1), n_fold);
 
-result = y_tree.hotel_cluster;
+result1 = y_tree.hotel_cluster;
 for i = 1:n_fold
     disp(i);
      % create cross-validation training and testing test
@@ -16,10 +16,11 @@ for i = 1:n_fold
     
      % decision tree without pruning 
     mdl_tree = dec_tree(train_x, train_y, category_var_index, 1, 0);
-    result(cv_group==i,1) = predict(mdl_tree, test_x);
+    result1(cv_group==i,1) = predict(mdl_tree, test_x);
 end 
-sum(result == y_tree.hotel_cluster)/size(y_tree,1)
+sum(result1 == y_tree.hotel_cluster)/size(y_tree,1)
 
+result2 = y_tree.hotel_cluster;
 for i = 1:n_fold
     disp(i);
      % create cross-validation training and testing test
@@ -28,10 +29,11 @@ for i = 1:n_fold
     test_x = x_tree(cv_group==i,1:end);  
     % decision tree with pruning
     mdl_tree_pruned = dec_tree(train_x, train_y, category_var_index, 1, 1);
-    result(cv_group==i,1) = predict(mdl_tree_pruned, test_x);
+    result2(cv_group==i,1) = predict(mdl_tree_pruned, test_x);
 end 
-sum(result == y_tree.hotel_cluster)/size(y_tree,1)
+sum(result2 == y_tree.hotel_cluster)/size(y_tree,1)
 
+result3 = y_tree.hotel_cluster;
 for i = 1:n_fold
     disp(i);
     % create cross-validation training and testing test
@@ -40,10 +42,11 @@ for i = 1:n_fold
     test_x = x_tree(cv_group==i,1:end);  
     % random forest
     mdl_forest = rand_forest(train_x, train_y, category_var_index, 100);
-    result(cv_group==i,1) = predict(mdl_forest, test_x);
+    result3(cv_group==i,1) = predict(mdl_forest, test_x);
 end 
-sum(result == y_tree.hotel_cluster)/size(y_tree,1)
+sum(result3 == y_tree.hotel_cluster)/size(y_tree,1)
 
+result4 = y_tree.hotel_cluster;
 for i = 1:n_fold
     disp(i);
      % create cross-validation training and testing test
@@ -69,7 +72,7 @@ for i = 1:n_fold
     row_num = find(cv_group==i);
     test_dest = test_x.srch_destination_id;
     for k = 1:size(test_dest,1)
-        result(row_num(k),1) = clusters(cat_cluster_pair(destination_cat == test_dest(k)));
+        result4(row_num(k),1) = clusters(cat_cluster_pair(destination_cat == test_dest(k)));
     end  
 end 
-sum(result == y_tree.hotel_cluster)/size(y_tree,1)
+sum(result4 == y_tree.hotel_cluster)/size(y_tree,1)
