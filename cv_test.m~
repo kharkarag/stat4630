@@ -2,15 +2,33 @@ s_original = readtable('Strain.csv');
 
 % d = readtable('destinations.csv');
 
-s = categorical_conversion(s_original);
-catogory_var_index = varfun(@iscategorical,s,'output','uniform');
+[s,s_cat] = categorical_conversion(s_original);
+catogory_var_index = varfun(@iscategorical,s_cat,'output','uniform');
 catogory_var_index = catogory_var_index(1:end-1);
 
-a = table2array(s);
-[nrow, ncol] = size(s);
 
-sample = randperm(nrow,10000)';
+[nrow, ncol] = size(s);
+sample_size = 50000;
+sample = randperm(nrow, sample_size)';
+s_sample = s(sample,:);
+
+n_fold = 10;
+
+rng(11)
+cv_group = crossvalind('Kfold', sample_size, n_fold);
+result = zeros(sample_size, 1);
+
+for i = 1:n_fold
+    train_x = s_sample(cv_group==i,1:end-1);
+    train_y = s_sample(cv_group==i,end);
+    test_x = s_sample(cv_group==i,1:end-1);
+    test_y = 
+end 
 nrow = size(sample, 1);
+
+
+cvfold = 10;
+
 
 train_x = s(sample(1:fix(nrow*3/4)), 1:end-1);
 train_y = s(sample(1:fix(nrow*3/4)), end);

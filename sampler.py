@@ -5,6 +5,7 @@ import numpy as np
 
 
 def counter(input):
+    frequency = zeros(101)
     with open(input, "r") as fin:
         spamreader = csv.reader(fin, delimiter=' ', quotechar='|')
         # frequency_map = dict()
@@ -20,11 +21,16 @@ def counter(input):
                 count += 1
                 if count%100000 == 0:
                     print(count/100000)
+<<<<<<< Updated upstream
                 #frequency_map[row[1].split(",")[23]] += 1
                 frequency_list[int(row[1].split(",")[23])][1] += 1
+=======
+                frequency[int(row[1].split(",")[23])] += 1
+>>>>>>> Stashed changes
             else:
                 count += 1
 
+<<<<<<< Updated upstream
 
     # index_list = [i for i in range(0, 100)]
     # for i in frequency_map:
@@ -39,6 +45,16 @@ def counter(input):
     ind = [tup[0] for tup in frequency_list[-5:]]
 
     print(ind)
+=======
+    fin.close();
+
+
+    print(frequency)
+    arr = np.array(frequency)
+    ind = np.argpartition(arr, -5)[-5:]
+    print(ind);
+    ind = map(str, ind)
+>>>>>>> Stashed changes
     return ind
 
 
@@ -81,7 +97,13 @@ def sampling(input, ind):
             print("Write total:", write_count)
 
 
+<<<<<<< Updated upstream
 #ind = counter("train.csv")
 ind = [65, 64, 48, 41, 91]
 print(ind)
+=======
+ind = counter("train.csv")
+#ind = [51, 60, 87, 78, 50]
+ind = map(str, ind)
+>>>>>>> Stashed changes
 sampling("train.csv", ind)
